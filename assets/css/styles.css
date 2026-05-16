@@ -235,7 +235,10 @@ h3 {
   position: relative;
   max-width: 720px;
   margin: clamp(28px, 5vw, 54px) 0 0;
-  padding: 18px 20px 18px 24px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  padding: 0 0 0 7px;
   background: var(--white);
   border: 1px solid var(--line);
   box-shadow: 0 18px 44px rgba(10, 10, 10, .05);
@@ -249,28 +252,28 @@ h3 {
   background: var(--blue);
 }
 
-.trust-proof p {
-  max-width: 620px;
+.trust-proof div {
+  display: grid;
+  align-content: center;
+  min-height: 126px;
+  padding: 16px 18px;
+  background: linear-gradient(180deg, var(--white), #fbfaf5);
+}
+
+.trust-proof strong {
   margin: 0;
-  color: var(--ink);
-  font-size: clamp(22px, 2.8vw, 38px);
-  font-weight: 950;
-  line-height: 1.12;
+  color: var(--blue);
+  font-size: clamp(34px, 4.5vw, 66px);
+  font-weight: 1000;
+  line-height: .9;
 }
 
 .trust-proof span {
   display: block;
-  max-width: 620px;
-  margin-top: 8px;
   color: var(--muted);
-  font-size: clamp(15px, 1.5vw, 19px);
-  font-weight: 750;
-  line-height: 1.42;
-}
-
-.trust-proof strong {
-  color: var(--blue);
-  font-weight: 1000;
+  font-size: clamp(13px, 1.28vw, 16px);
+  font-weight: 850;
+  line-height: 1.2;
 }
 
 .hero-visual {
@@ -813,28 +816,48 @@ h3 {
 
 .pillar-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  border: 1px solid var(--line);
+  background: var(--line);
 }
 
 .pillar,
 .promise {
   position: relative;
   min-height: 0;
-  padding: 18px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px 14px;
+  align-content: start;
+  padding: 16px 18px;
+  border: 0;
 }
 
 .pillar span,
 .promise span {
-  display: inline-block;
-  margin-bottom: 18px;
+  grid-row: span 2;
+  display: inline-grid;
+  min-width: 34px;
+  margin-bottom: 0;
   color: var(--blue);
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 1000;
+  line-height: 1;
 }
 
 .pillar h3,
 .promise h3 {
-  font-size: clamp(22px, 2vw, 30px);
-  line-height: 1.08;
+  margin-bottom: 0;
+  font-size: clamp(19px, 1.7vw, 26px);
+  line-height: 1.02;
+}
+
+.pillar p,
+.promise p {
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
 }
 
 .mascot-band {
@@ -867,7 +890,9 @@ blockquote {
 .promise-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 14px;
+  gap: 0;
+  border: 1px solid var(--line);
+  background: var(--line);
 }
 
 .pack-note {
@@ -1130,6 +1155,10 @@ footer {
   .promise-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .promise-grid .promise:last-child {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 900px) {
@@ -1245,16 +1274,21 @@ footer {
 
   .trust-proof {
     margin-top: 22px;
-    padding: 16px 16px 16px 20px;
+    grid-template-columns: 1fr;
+    padding-left: 6px;
   }
 
-  .trust-proof p {
-    font-size: 24px;
-    line-height: 1.18;
+  .trust-proof div {
+    min-height: 92px;
+    padding: 14px 16px;
   }
 
   .trust-proof span {
-    font-size: 15px;
+    font-size: 13px;
+  }
+
+  .trust-proof strong {
+    font-size: 38px;
   }
 
   .product-grid,
@@ -1340,13 +1374,17 @@ footer {
 
   .pillar,
   .promise {
-    padding: 16px;
+    padding: 14px;
   }
 
   .pillar span,
   .promise span {
-    margin-bottom: 12px;
-    font-size: 26px;
+    min-width: 32px;
+    font-size: 22px;
+  }
+
+  .promise-grid .promise:last-child {
+    grid-column: auto;
   }
 
   .contact-card > div {
