@@ -25,7 +25,7 @@ Default mode is `official`.
 
 - `official`: reads recent media from the connected Instagram Business account `rudedog.co`.
 - `hashtag`: reads public media from `#rudedog`, but only after Meta approves `Instagram Public Content Access`.
-- Current live fallback: `scripts/update-instagram-feed.mjs` writes recent public `@rudedog.co` posts into `assets/data/instagram-feed.json`.
+- Current live fallback: `scripts/update-instagram-feed.mjs` downloads recent public `@rudedog.co` images into `assets/images/instagram/` and writes them into `assets/data/instagram-feed.json`.
 - Run `node scripts/update-instagram-feed.mjs` before a push when the landing page needs a fresh official Instagram snapshot.
 
 To switch back after approval, change the Worker URL/config from `mode=official` or `IG_FEED_MODE = "official"` to `mode=hashtag` / `IG_FEED_MODE = "hashtag"`.
