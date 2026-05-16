@@ -159,6 +159,7 @@ h3 {
 }
 
 .button {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -183,6 +184,51 @@ h3 {
 
 .button.ghost {
   background: var(--white);
+}
+
+.deal-pop {
+  position: relative;
+  overflow: visible;
+}
+
+.deal-pop::after {
+  content: attr(data-deal);
+  position: absolute;
+  top: -14px;
+  right: -13px;
+  z-index: 2;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  color: white;
+  background: #ee4d2d;
+  border: 2px solid var(--white);
+  border-radius: 999px;
+  box-shadow: 0 8px 18px rgba(238, 77, 45, .24);
+  font-size: 10px;
+  font-weight: 1000;
+  line-height: 1;
+  pointer-events: none;
+  transform: rotate(7deg);
+  animation: deal-float 2.8s ease-in-out infinite;
+}
+
+.deal-pop-b::after {
+  top: -12px;
+  right: auto;
+  left: -12px;
+  transform: rotate(-8deg);
+  animation-duration: 3.2s;
+  animation-delay: .25s;
+}
+
+.deal-pop-c::after {
+  top: -16px;
+  right: -7px;
+  transform: rotate(11deg);
+  animation-duration: 3.6s;
+  animation-delay: .45s;
 }
 
 .stat-row {
@@ -587,6 +633,7 @@ h3 {
 }
 
 .product-card > div:not(.product-media) a {
+  position: relative;
   display: inline-flex;
   min-height: 38px;
   align-items: center;
@@ -776,6 +823,11 @@ footer {
   50% { transform: translateY(-6px); }
 }
 
+@keyframes deal-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -4px; }
+}
+
 @keyframes marquee-left {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -880,6 +932,19 @@ footer {
 
   h1 {
     font-size: clamp(76px, 26vw, 118px);
+  }
+
+  .deal-pop::after {
+    top: -11px;
+    right: -8px;
+    width: 31px;
+    height: 31px;
+    border-width: 1.5px;
+    font-size: 9px;
+  }
+
+  .deal-pop-b::after {
+    left: -7px;
   }
 
   .section {
