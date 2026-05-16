@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kennyudomsak.github.io/rudedog-landing/sitemap.xml
+Sitemap: https://rudedog.co/sitemap.xml
