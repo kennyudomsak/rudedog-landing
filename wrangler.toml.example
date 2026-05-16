@@ -1,0 +1,19 @@
+name = "rudedog-instagram-feed"
+main = "workers/instagram-hashtag-worker.js"
+compatibility_date = "2026-05-17"
+
+[vars]
+IG_HASHTAG = "rudedog"
+IG_BUSINESS_ACCOUNT_ID = "17841401168141637"
+IG_FEED_MODE = "official"
+IG_MARKET = "TH"
+IG_THAILAND_KEYWORDS = "ไทย,ประเทศไทย,กรุงเทพ,bangkok,thailand,นนทบุรี,rudedogthailand,rudedogthai"
+META_GRAPH_VERSION = "v25.0"
+
+# Add the live route after the Worker is connected to the Cloudflare zone.
+# routes = [
+#   { pattern = "rudedog.co/api/instagram-feed*", zone_name = "rudedog.co" }
+# ]
+
+# Store secrets with:
+# npx wrangler secret put IG_ACCESS_TOKEN

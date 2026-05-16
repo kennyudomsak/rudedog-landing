@@ -231,31 +231,46 @@ h3 {
   animation-delay: .45s;
 }
 
-.stat-row {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+.trust-proof {
+  position: relative;
   max-width: 720px;
   margin: clamp(28px, 5vw, 54px) 0 0;
+  padding: 18px 20px 18px 24px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 44px rgba(10, 10, 10, .05);
 }
 
-.stat-row div {
-  padding-top: 12px;
-  border-top: 1px solid var(--line);
+.trust-proof::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 7px;
+  background: var(--blue);
 }
 
-.stat-row dt {
-  font-size: clamp(30px, 4vw, 56px);
-  line-height: 1;
-  font-weight: 1000;
+.trust-proof p {
+  max-width: 620px;
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(22px, 2.8vw, 38px);
+  font-weight: 950;
+  line-height: 1.12;
 }
 
-.stat-row dd {
-  margin: 4px 0 0;
+.trust-proof span {
+  display: block;
+  max-width: 620px;
+  margin-top: 8px;
   color: var(--muted);
-  font-size: 12px;
-  font-weight: 850;
-  text-transform: uppercase;
+  font-size: clamp(15px, 1.5vw, 19px);
+  font-weight: 750;
+  line-height: 1.42;
+}
+
+.trust-proof strong {
+  color: var(--blue);
+  font-weight: 1000;
 }
 
 .hero-visual {
@@ -370,6 +385,107 @@ h3 {
 
 .section-heading h2 {
   max-width: 1060px;
+}
+
+.instagram-section {
+  background: var(--paper);
+}
+
+.instagram-feed {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 180px;
+  gap: 14px;
+}
+
+.ig-spotlight {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(240px, .62fr);
+  min-height: 430px;
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+
+.ig-spotlight img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: white;
+  transition: opacity .35s ease, transform .35s ease;
+}
+
+.ig-spotlight:hover img {
+  transform: scale(1.02);
+}
+
+.ig-spotlight > div {
+  display: grid;
+  align-content: end;
+  padding: clamp(18px, 3vw, 34px);
+  border-left: 1px solid var(--line);
+}
+
+.ig-spotlight span,
+.ig-disclaimer {
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.ig-spotlight strong {
+  margin-top: 10px;
+  color: var(--ink);
+  font-size: clamp(30px, 4vw, 60px);
+  font-weight: 1000;
+  line-height: .95;
+}
+
+.ig-spotlight p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 17px;
+  font-weight: 750;
+}
+
+.ig-thumbs {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.ig-thumb {
+  position: relative;
+  width: 100%;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--line);
+  cursor: pointer;
+}
+
+.ig-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .72;
+}
+
+.ig-thumb.is-active {
+  border-color: var(--blue);
+}
+
+.ig-thumb.is-active img {
+  opacity: 1;
+}
+
+.ig-disclaimer {
+  max-width: 760px;
+  margin: 14px 0 0;
+  color: var(--muted);
+  text-transform: none;
 }
 
 .manifesto-grid,
@@ -1028,6 +1144,33 @@ footer {
     grid-template-columns: 1fr;
   }
 
+  .instagram-feed,
+  .ig-spotlight {
+    grid-template-columns: 1fr;
+  }
+
+  .ig-spotlight {
+    min-height: 0;
+  }
+
+  .ig-spotlight img {
+    aspect-ratio: 1 / 1.04;
+  }
+
+  .ig-spotlight > div {
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
+  .ig-thumbs {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: none;
+  }
+
+  .ig-thumb img {
+    aspect-ratio: 1 / 1;
+  }
+
   .hero {
     min-height: 0;
   }
@@ -1063,10 +1206,60 @@ footer {
     align-items: flex-start;
   }
 
+  .hero {
+    padding-top: 28px;
+  }
+
+  .hero-meta {
+    display: none;
+  }
+
+  .hero .eyebrow {
+    margin-bottom: 14px;
+    font-size: 11px;
+  }
+
+  .hero-title {
+    flex-wrap: nowrap;
+    gap: 0;
+    margin-bottom: 14px;
+  }
+
+  .lead {
+    max-width: 100%;
+    font-size: 21px;
+    line-height: 1.36;
+  }
+
+  .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 22px;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+    min-height: 46px;
+  }
+
+  .trust-proof {
+    margin-top: 22px;
+    padding: 16px 16px 16px 20px;
+  }
+
+  .trust-proof p {
+    font-size: 24px;
+    line-height: 1.18;
+  }
+
+  .trust-proof span {
+    font-size: 15px;
+  }
+
   .product-grid,
   .pillar-grid,
-  .promise-grid,
-  .stat-row {
+  .promise-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1084,6 +1277,14 @@ footer {
 
   .motion-bottom {
     height: 158px;
+  }
+
+  .ig-spotlight strong {
+    font-size: 34px;
+  }
+
+  .ig-spotlight p {
+    font-size: 15px;
   }
 
   .ticker {
@@ -1106,7 +1307,8 @@ footer {
   }
 
   h1 {
-    font-size: clamp(76px, 26vw, 118px);
+    font-size: clamp(58px, 19vw, 86px);
+    line-height: .96;
   }
 
   .deal-pop::after {

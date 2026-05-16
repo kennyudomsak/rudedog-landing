@@ -1,0 +1,38 @@
+{
+  "source": "RUDEDOG Official",
+  "updatedAt": "2026-05-17T02:35:00+07:00",
+  "items": [
+    {
+      "tag": "RUDEDOG OFFICIAL",
+      "title": "ALPHA IN THE PACK",
+      "caption": "ภาพแรกจะถูกแทนด้วยโพสต์ล่าสุดจาก Instagram ทางการเมื่อเชื่อม Worker แล้ว",
+      "image": "assets/images/alpha-cap-hero.jpg",
+      "alt": "หมวก RUDEDOG ALPHA CAP บนโมเดล",
+      "url": "https://www.instagram.com/rudedog.co/"
+    },
+    {
+      "tag": "RUDEDOG OFFICIAL",
+      "title": "MOTION READY",
+      "caption": "ใช้ feed ทางการก่อนเพื่อคุมโทนและประสบการณ์ของแบรนด์",
+      "image": "assets/images/motion-model.jpg",
+      "alt": "โมเดลใช้กระเป๋า RUDEDOG MOTION",
+      "url": "https://www.instagram.com/rudedog.co/"
+    },
+    {
+      "tag": "RUDEDOG OFFICIAL",
+      "title": "STORM ROUTE",
+      "caption": "หลัง Meta อนุมัติ public hashtag จะสลับกลับมาใช้ #rudedog ได้",
+      "image": "assets/images/storm-model.jpg",
+      "alt": "กระเป๋า RUDEDOG STORM Route",
+      "url": "https://www.instagram.com/rudedog.co/"
+    },
+    {
+      "tag": "RUDEDOG OFFICIAL",
+      "title": "OUTSIDE THE BOX",
+      "caption": "พื้นที่นี้พร้อมต่อกับ Instagram จริงโดยไม่เปิด token ในหน้าเว็บ",
+      "image": "assets/images/brand-mascot-dog-v2.jpg",
+      "alt": "Bull Terrier สัญลักษณ์ RUDEDOG",
+      "url": "https://www.instagram.com/rudedog.co/"
+    }
+  ]
+}
