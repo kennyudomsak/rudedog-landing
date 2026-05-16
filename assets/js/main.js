@@ -19,3 +19,18 @@ document.querySelectorAll('a[href*="shopee"]').forEach((link) => {
     });
   });
 });
+
+document.querySelectorAll("[data-contact-form]").forEach((form) => {
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const message = form.querySelector("textarea")?.value.trim();
+    const body = message || "สวัสดีครับ สนใจติดต่อ RUDEDOG";
+    const subject = "ติดต่อ RUDEDOG จากเว็บไซต์";
+    const mailto = new URL("mailto:Ken.udomsak@rdbox.co");
+
+    mailto.searchParams.set("subject", subject);
+    mailto.searchParams.set("body", body);
+    window.location.href = mailto.toString();
+  });
+});
