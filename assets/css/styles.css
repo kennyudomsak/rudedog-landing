@@ -20,6 +20,7 @@ body {
   color: var(--ink);
   background: var(--paper);
   line-height: 1.5;
+  overflow-x: hidden;
 }
 
 a {
@@ -260,17 +261,23 @@ h3 {
   display: flex;
   gap: 18px;
   overflow: hidden;
+  position: relative;
+  z-index: 2;
+  margin: -4px 0 4px;
   padding: 12px 0;
   color: white;
   background: var(--blue);
+  box-shadow: 0 18px 42px rgba(26, 43, 255, .12);
   font-size: 13px;
   font-weight: 950;
+  transform: rotate(-1.15deg);
+  transform-origin: center;
   white-space: nowrap;
 }
 
 .ticker span {
   min-width: max-content;
-  animation: drift 16s linear infinite;
+  animation: drift 14s linear infinite;
 }
 
 .section {
@@ -587,8 +594,8 @@ blockquote {
   overflow: hidden;
   max-width: 520px;
   justify-self: end;
-  background: #2d2c2a;
-  border: 1px solid #504f4a;
+  background: var(--white);
+  border: 1px solid var(--line);
 }
 
 .mascot-card img {
@@ -799,6 +806,10 @@ footer {
 
   .motion-bottom {
     height: 158px;
+  }
+
+  .ticker {
+    transform: rotate(-1.6deg);
   }
 
   .marquee-band {
