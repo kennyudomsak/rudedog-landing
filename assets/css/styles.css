@@ -5,6 +5,7 @@
   --soft: #ebe8dd;
   --line: #d9d3c5;
   --blue: #1a2bff;
+  --copper: #b8754d;
   --white: #fffefa;
 }
 
@@ -347,11 +348,25 @@ h3 {
   border-bottom: 1px solid var(--line);
 }
 
+.motion-top {
+  height: clamp(84px, 9vw, 132px);
+  border-bottom: 0;
+}
+
+.motion-mid {
+  height: clamp(226px, 25.65vw, 370px);
+}
+
+.motion-bottom {
+  height: clamp(150px, 17vw, 245px);
+  background: linear-gradient(180deg, #f0eee7 0%, var(--paper) 100%);
+}
+
 .marquee-band {
   position: absolute;
   left: -16vw;
   width: 132vw;
-  padding: 11px 0;
+  padding: calc(11px * .95) 0;
   color: white;
   background: var(--blue);
   box-shadow: 0 18px 40px rgba(26, 43, 255, .14);
@@ -367,6 +382,7 @@ h3 {
   top: 44%;
   transform: rotate(3.5deg);
   opacity: .92;
+  background: var(--copper);
 }
 
 .marquee-band-three {
@@ -386,22 +402,58 @@ h3 {
 
 .marquee-band-two .marquee-track {
   animation-name: marquee-right;
-  animation-duration: 31s;
+  animation-duration: 29s;
 }
 
 .marquee-band-three .marquee-track {
-  animation-duration: 18s;
+  animation-duration: 19s;
 }
 
 .marquee-track span {
   display: inline-flex;
   align-items: center;
   min-width: max-content;
-  font-size: clamp(24px, 4.4vw, 72px);
+  font-size: clamp(23px, 4.18vw, 68px);
   line-height: .9;
   font-weight: 1000;
   letter-spacing: 0;
   text-transform: uppercase;
+}
+
+.motion-top .marquee-band-one {
+  top: 6%;
+  transform: rotate(-1.4deg);
+}
+
+.motion-top .marquee-band-two {
+  top: 47%;
+  transform: rotate(1.2deg);
+}
+
+.motion-top .marquee-track {
+  animation-duration: 21s;
+}
+
+.motion-top .marquee-band-two .marquee-track {
+  animation-duration: 26s;
+}
+
+.motion-bottom .marquee-band-one {
+  top: 27%;
+  transform: rotate(4.2deg);
+}
+
+.motion-bottom .marquee-band-two {
+  top: 43%;
+  transform: rotate(-5.1deg);
+}
+
+.motion-bottom .marquee-track {
+  animation-duration: 24s;
+}
+
+.motion-bottom .marquee-band-two .marquee-track {
+  animation-duration: 34s;
 }
 
 .alpha-feature {
@@ -457,14 +509,26 @@ h3 {
   overflow: hidden;
 }
 
-.product-card img {
+.product-media {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 1px;
+  background: var(--line);
+}
+
+.product-media img {
   width: 100%;
   aspect-ratio: 1 / 1.08;
   object-fit: cover;
   background: white;
 }
 
-.product-card div {
+.product-media img:nth-child(2) {
+  object-fit: contain;
+  padding: 12px;
+}
+
+.product-card > div:not(.product-media) {
   padding: 18px;
 }
 
@@ -547,6 +611,45 @@ blockquote {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 14px;
+}
+
+.dealer-section {
+  background: var(--white);
+}
+
+.dealer-layout {
+  display: grid;
+  grid-template-columns: minmax(0, .72fr) minmax(320px, 1fr);
+  gap: clamp(22px, 5vw, 62px);
+  align-items: start;
+}
+
+.dealer-copy p {
+  max-width: 620px;
+  color: var(--muted);
+  font-size: 18px;
+  font-weight: 650;
+}
+
+.dealer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.dealer-grid span {
+  min-height: 68px;
+  display: grid;
+  place-items: center;
+  padding: 12px;
+  color: var(--blue);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  font-size: clamp(17px, 2vw, 28px);
+  font-weight: 1000;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .closing {
@@ -651,6 +754,10 @@ footer {
     grid-template-columns: 1fr 1fr;
   }
 
+  .dealer-layout {
+    grid-template-columns: 1fr;
+  }
+
   .mascot-card {
     justify-self: stretch;
     max-width: none;
@@ -677,10 +784,18 @@ footer {
     height: 230px;
   }
 
+  .motion-top {
+    height: 112px;
+  }
+
+  .motion-bottom {
+    height: 158px;
+  }
+
   .marquee-band {
     left: -24vw;
     width: 148vw;
-    padding: 9px 0;
+    padding: calc(9px * .95) 0;
   }
 
   .alpha-swatches {
@@ -700,7 +815,15 @@ footer {
     padding-inline: 14px;
   }
 
-  .product-card img {
+  .product-media {
+    grid-template-columns: 1fr;
+  }
+
+  .product-media img {
     aspect-ratio: 1 / 1;
+  }
+
+  .dealer-grid {
+    grid-template-columns: 1fr;
   }
 }
