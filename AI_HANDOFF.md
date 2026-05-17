@@ -89,6 +89,23 @@
 - `กรอบ` width matches `คนนอก` width, not `#คนนอก`
 - No horizontal overflow found in the checked viewports
 
+## 2026-05-17 Local Proof + Instagram Preview Fix
+
+ยังไม่ push / deploy / live หลัง commit `615e2d6` จนกว่าผู้ใช้จะสั่ง push อีกครั้ง
+
+### Changes Made Locally
+
+- Updated `assets/css/styles.css`
+  - Enlarged `.proof-label` and `.proof-note` so the small Thai explanation lines feel fuller and closer to the visual weight of the numbers
+  - Tuned mobile `.trust-proof strong` sizing to keep `1,000,000+`, `15,000,000`, and `SINCE 1981` readable without causing horizontal overflow
+  - Fixed mobile Instagram preview text by adding safer wrapping, line-height, and mobile caption clamping for `.ig-spotlight strong` and `.ig-spotlight p`
+
+### Local Verification
+
+- Checked local `390x844`, `360x760`, and `1440x1000`
+- Confirmed `document.documentElement.scrollWidth - window.innerWidth` is `0`
+- Confirmed Instagram preview text no longer overlaps on mobile
+
 ## 2026-05-17 Instagram Hashtag Feed Install
 
 ผู้ใช้ให้ติดตั้งส่วน Instagram feed สำหรับ `#rudedog` ในประเทศไทย
