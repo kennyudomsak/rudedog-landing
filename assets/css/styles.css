@@ -126,10 +126,29 @@ nav {
   text-transform: uppercase;
 }
 
-.shop-link,
 .eyebrow,
 .tag {
   color: var(--blue);
+}
+
+.shop-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 950;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: white;
+  background: var(--blue);
+  border: 1px solid var(--blue);
+  transition: transform .2s ease, background .2s ease;
+}
+
+.shop-link:hover {
+  transform: translateY(-1px);
+  background: var(--ink);
+  border-color: var(--ink);
 }
 
 .hero {
@@ -1390,14 +1409,8 @@ footer,
 }
 
 .reveal {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity .65s ease, transform .65s ease;
-}
-
-.reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 @keyframes drift {
@@ -1480,7 +1493,8 @@ footer,
 
   .header-actions .shop-link {
     font-size: 11px;
-    padding: 8px 12px;
+    padding: 7px 10px;
+    letter-spacing: 0.02em;
   }
 
   .hero,

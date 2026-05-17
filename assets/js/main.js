@@ -1,13 +1,7 @@
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("is-visible");
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
-
-document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+// .reveal is now a layout marker only; CSS keeps it visible by default
+// so content can never get stuck hidden. We previously had a fade-in
+// animation driven by IntersectionObserver, but on instant/programmatic
+// scrolls the observer would miss elements and leave sections blank.
 
 document.querySelectorAll('a[href*="shopee"]').forEach((link) => {
   link.addEventListener("click", () => {
