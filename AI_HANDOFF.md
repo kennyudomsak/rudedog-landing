@@ -106,6 +106,33 @@
 - Confirmed `document.documentElement.scrollWidth - window.innerWidth` is `0`
 - Confirmed Instagram preview text no longer overlaps on mobile
 
+## 2026-05-17 Local Instagram Mobile Row Fix
+
+ยังไม่ push / deploy / live หลัง commit `4b7e007` จนกว่าผู้ใช้จะสั่ง push อีกครั้ง
+
+### Changes Made Locally
+
+- Updated `assets/css/styles.css`
+  - In the mobile Instagram breakpoint, `.ig-spotlight img` now overrides the desktop `height: 100%` with `height: auto`
+  - Forced the image into grid row 1 and the text panel into grid row 2
+  - Added a white background and z-index to the text panel so it cannot visually overlay the image
+
+### Local Verification Needed
+
+- Recheck mobile screenshot around the Instagram section before pushing
+
+## 2026-05-17 Local Aero3 Figure Redesign
+
+ยังไม่ push / deploy / live หลัง commit `4b7e007` จนกว่าผู้ใช้จะสั่ง push อีกครั้ง
+
+### Changes Made Locally
+
+- Updated `assets/css/styles.css`
+  - Redesigned `.aero3-figure` from a heavy black card into a lighter brand proof block
+  - Replaced black background with translucent white/paper background, thin blue top rule, subtle bottom divider, and a narrow blue accent rail
+  - Removed the white rectangle behind `15,000,000`; the number now sits directly on the page with brand-blue emphasis
+  - Tuned mobile sizing so the number stays large but fits within the viewport
+
 ## 2026-05-17 Instagram Hashtag Feed Install
 
 ผู้ใช้ให้ติดตั้งส่วน Instagram feed สำหรับ `#rudedog` ในประเทศไทย

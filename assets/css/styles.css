@@ -647,32 +647,43 @@ h3 {
 }
 
 .aero3-figure {
+  position: relative;
   display: grid;
   align-content: center;
-  gap: 6px;
-  padding: clamp(24px, 4vw, 48px);
-  background: var(--ink);
-  color: var(--white);
-  border-radius: 4px;
+  gap: clamp(10px, 1.5vw, 16px);
+  padding: clamp(24px, 4vw, 46px);
+  background: rgba(255, 255, 255, .72);
+  color: var(--ink);
+  border-top: 2px solid var(--blue);
+  border-bottom: 1px solid var(--line);
   text-align: left;
 }
 
+.aero3-figure::before {
+  content: "";
+  position: absolute;
+  inset: clamp(18px, 3vw, 34px) auto clamp(18px, 3vw, 34px) 0;
+  width: 7px;
+  background: var(--blue);
+}
+
 .aero3-figure strong {
-  font-size: clamp(52px, 9vw, 120px);
-  line-height: .95;
-  font-weight: 1000;
-  letter-spacing: -0.02em;
+  display: block;
+  width: min-content;
+  max-width: 100%;
   color: var(--blue);
-  background: var(--white);
-  padding: 0 12px;
-  display: inline-block;
-  width: max-content;
+  font-size: clamp(58px, 8.2vw, 112px);
+  font-weight: 1000;
+  line-height: .88;
+  letter-spacing: 0;
 }
 
 .aero3-figure span {
-  font-size: clamp(16px, 2vw, 22px);
-  letter-spacing: .04em;
-  text-transform: uppercase;
+  max-width: 16ch;
+  color: #55514c;
+  font-size: clamp(22px, 2.6vw, 36px);
+  font-weight: 950;
+  line-height: 1.05;
 }
 
 .aero3-copy {
@@ -1572,11 +1583,16 @@ footer,
   }
 
   .aero3-figure {
-    padding: 20px;
+    padding: 24px;
   }
 
   .aero3-figure strong {
-    font-size: clamp(46px, 13vw, 80px);
+    font-size: clamp(52px, 15vw, 66px);
+  }
+
+  .aero3-figure span {
+    max-width: none;
+    font-size: clamp(22px, 6.2vw, 28px);
   }
 
   .instagram-feed,
@@ -1586,13 +1602,21 @@ footer,
 
   .ig-spotlight {
     min-height: 0;
+    grid-auto-rows: auto;
   }
 
   .ig-spotlight img {
     aspect-ratio: 1 / 1.04;
+    display: block;
+    height: auto;
+    grid-row: 1;
   }
 
   .ig-spotlight > div {
+    position: relative;
+    z-index: 1;
+    grid-row: 2;
+    background: var(--white);
     border-top: 1px solid var(--line);
     border-left: 0;
     align-content: start;
