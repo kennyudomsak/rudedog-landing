@@ -202,6 +202,7 @@
 - Hero headline uses `Bai Jamjuree` from Google Fonts while keeping the two-line `#คนนอก` / `กรอบ` layout.
 - Proof pack is now six floating white cards with rounded corners and a subtle shadow.
 - Proof cards include `ผู้คนนับ 1,000,000+`, linked `TikTok Shop 4.9/5`, linked `Shopee 4.9/5`, linked `1.5M Facebook followers`, linked `180K TikTok followers`, and linked `30K Shopee followers`.
+- After push, a mobile browser showed the new proof-card HTML with stale cached CSS, so the stylesheet link was versioned as `assets/css/styles.css?v=20260517-proof-cards` to force cache refresh.
 
 ### 2026-05-17 Instagram Token Status
 
