@@ -61,3 +61,58 @@
   - mobile product cards no longer stack both images vertically
   - header buttons do not collide
   - image placeholders look intentional while lazy images load
+
+## 2026-05-17 Instagram Hashtag Feed Install
+
+ผู้ใช้ให้ติดตั้งส่วน Instagram feed สำหรับ `#rudedog` ในประเทศไทย
+
+### Changes Made
+
+- Updated `index.html`
+  - Homepage feed now calls `/api/instagram-feed?mode=hashtag&tag=rudedog&market=TH`
+  - Fallback remains `assets/data/instagram-feed.json`
+- Added committed `wrangler.toml`
+  - Worker route: `rudedog.co/api/instagram-feed*`
+  - `IG_FEED_MODE = "hashtag"`
+  - `IG_MARKET = "TH"`
+  - `IG_HASHTAG = "rudedog"`
+- Updated `workers/instagram-hashtag-worker.js`
+  - Added OPTIONS/CORS handling for the API route
+- Updated `docs/instagram-feed-setup.md`
+  - Documented hashtag-first mode and fallback behavior
+- Updated `.gitignore`
+  - Ignore `.dev.vars` and `.wrangler/`
+
+### Current Deploy Blockers
+
+- Local machine is not authenticated with Cloudflare Wrangler: `npx wrangler whoami` returns not authenticated
+- No local `IG_ACCESS_TOKEN` environment variable was available
+- The Worker cannot be deployed from this machine until Cloudflare login and the Instagram token secret are added
+
+### Deploy When Credentials Are Available
+
+Run from repo root:
+
+```sh
+npx wrangler login
+npx wrangler secret put IG_ACCESS_TOKEN
+npx wrangler deploy
+```
+
+After deploy, test:
+
+```sh
+curl "https://rudedog.co/api/instagram-feed?mode=hashtag&tag=rudedog&market=TH"
+```
+
+Expected JSON shape:
+
+```json
+{
+  "source": "#rudedog",
+  "updatedAt": "...",
+  "items": []
+}
+```
+
+If Meta still blocks `ig_hashtag_search`, the endpoint may return `403` with `Instagram hashtag access is not available yet.` The homepage will keep using the static fallback JSON.

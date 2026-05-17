@@ -1,5 +1,9 @@
 export default {
   async fetch(request, env) {
+    if (request.method === "OPTIONS") {
+      return corsResponse();
+    }
+
     const url = new URL(request.url);
     const hashtag = url.searchParams.get("tag") || env.IG_HASHTAG || "rudedog";
     const mode = (url.searchParams.get("mode") || env.IG_FEED_MODE || "official").toLowerCase();
@@ -148,10 +152,26 @@ function isAllowedMarket(item, market, env) {
 function jsonResponse(payload, status = 200) {
   return new Response(JSON.stringify(payload, null, 2), {
     status,
+    headers: responseHeaders()
+  });
+}
+
+function corsResponse() {
+  return new Response(null, {
+    status: 204,
     headers: {
-      "content-type": "application/json; charset=utf-8",
-      "cache-control": "public, max-age=900",
-      "access-control-allow-origin": "https://rudedog.co"
+      ...responseHeaders(),
+      "access-control-allow-methods": "GET, OPTIONS",
+      "access-control-allow-headers": "content-type"
     }
   });
+}
+
+function responseHeaders() {
+  return {
+    "content-type": "application/json; charset=utf-8",
+    "cache-control": "public, max-age=900",
+    "access-control-allow-origin": "https://rudedog.co",
+    "vary": "origin"
+  };
 }

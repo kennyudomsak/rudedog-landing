@@ -21,14 +21,16 @@ Until that approval is complete, the live site should use the official `@rudedog
 
 ## Current Feed Mode
 
-Default mode is `official`.
+Default mode is now `hashtag` for the live Worker route.
 
 - `official`: reads recent media from the connected Instagram Business account `rudedog.co`.
 - `hashtag`: reads public media from `#rudedog`, but only after Meta approves `Instagram Public Content Access`.
 - Current live fallback: `scripts/update-instagram-feed.mjs` downloads recent public `@rudedog.co` images into `assets/images/instagram/` and writes them into `assets/data/instagram-feed.json`.
 - Run `node scripts/update-instagram-feed.mjs` before a push when the landing page needs a fresh official Instagram snapshot.
 
-To switch back after approval, change the Worker URL/config from `mode=official` or `IG_FEED_MODE = "official"` to `mode=hashtag` / `IG_FEED_MODE = "hashtag"`.
+The homepage now calls `/api/instagram-feed?mode=hashtag&tag=rudedog&market=TH` first. If the Worker is unavailable, the JavaScript falls back to `assets/data/instagram-feed.json`.
+
+To switch back to the official feed, change the homepage Worker URL/config from `mode=hashtag` or `IG_FEED_MODE = "hashtag"` to `mode=official` / `IG_FEED_MODE = "official"`.
 
 ## Live Hashtag Flow
 
@@ -42,7 +44,7 @@ To switch back after approval, change the Worker URL/config from `mode=official`
 6. Submit the Meta app for `Instagram Public Content Access` review.
 7. Point the website feed source to the Worker endpoint or run a scheduled job that writes a reviewed JSON file.
 
-The site is already wired to try `/api/instagram-feed?mode=official` first and fall back to `assets/data/instagram-feed.json` when the Worker is not available.
+The site is wired to try `/api/instagram-feed?mode=hashtag&tag=rudedog&market=TH` first and fall back to `assets/data/instagram-feed.json` when the Worker is not available or returns no usable items.
 
 ## Thailand-Only Filtering
 
