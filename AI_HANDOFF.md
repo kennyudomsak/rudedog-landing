@@ -195,6 +195,19 @@
 - GitHub CLI auth was refreshed with the `workflow` scope.
 - Added `.github/workflows/instagram-feed-health.yml` to run `node scripts/check-instagram-feed.mjs` daily and via manual `workflow_dispatch`.
 
+### 2026-05-17 Hero Layout Adjustment
+
+- User approved pushing this batch.
+- ALPHA CAP product image now appears before the trust/social proof pack.
+- Hero headline uses `Bai Jamjuree` from Google Fonts while keeping the two-line `#คนนอก` / `กรอบ` layout.
+- Proof pack is now six floating white cards with rounded corners and a subtle shadow.
+- Proof cards include `ผู้คนนับ 1,000,000+`, linked `TikTok Shop 4.9/5`, linked `Shopee 4.9/5`, linked `1.5M Facebook followers`, linked `180K TikTok followers`, and linked `30K Shopee followers`.
+
+### 2026-05-17 Instagram Token Status
+
+- During pre-push verification, `node scripts/check-instagram-feed.mjs` reported the Worker live endpoint failing again with Meta token expiry: `Session has expired on Sunday, 17-May-26 05:00:00 PDT`.
+- Static fallback still works with 8 local `@rudedog.co` items, so the homepage should not visually break, but the Cloudflare Worker secret needs another long-lived token refresh.
+
 ### Deploy When Credentials Are Available
 
 Run from repo root:
