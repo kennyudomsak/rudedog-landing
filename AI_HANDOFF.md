@@ -101,6 +101,7 @@
 - Important DNS note: `rudedog.co` currently resolves directly to GitHub Pages IPs, so Cloudflare route interception does not work unless DNS is moved/proxied through Cloudflare. The homepage therefore uses the workers.dev URL directly.
 - Current Meta blocker: hashtag endpoint returns `403` because Meta requires App Review approval for `Instagram Public Content Access`. The site falls back to the static JSON until approval.
 - Live official endpoint works and returns recent `@rudedog.co` media, so the homepage uses that as the middle fallback while hashtag review is pending.
+- Meta dashboard update: `Instagram Public Content Access` was added to the app permissions/features list and now shows `พร้อมทดสอบ` (ready for testing). The App Review submission page still shows nothing submitted, so Meta has not granted live public hashtag access yet.
 
 ### Deploy When Credentials Are Available
 
