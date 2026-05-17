@@ -32,6 +32,46 @@ The homepage now calls `https://rudedog-instagram-feed.rudedog.workers.dev?mode=
 
 To switch back to the official feed, change the homepage Worker URL/config from `mode=hashtag` or `IG_FEED_MODE = "hashtag"` to `mode=official` / `IG_FEED_MODE = "official"`.
 
+## Token Rotation And Expiry Prevention
+
+The Worker uses `IG_ACCESS_TOKEN` from Cloudflare secrets. If Meta returns `Error validating access token: Session has expired`, both the hashtag and official live endpoints will return `403`; the homepage still falls back to `assets/data/instagram-feed.json`.
+
+Prevention:
+
+- Use a long-lived Meta user access token for the connected Page / Instagram Business account.
+- Refresh or replace the token before it expires. Long-lived tokens are still not permanent, so schedule a manual rotation cadence around every 45 days.
+- Keep `META_APP_ID`, `META_APP_SECRET`, and `IG_ACCESS_TOKEN` out of git.
+- Run `scripts/check-instagram-feed.mjs` daily from an automation or CI job. A failed check means the live Worker feed is broken, usually because Meta blocked hashtag access or the token expired.
+
+Health check:
+
+```sh
+node scripts/check-instagram-feed.mjs
+```
+
+Exchange a newly generated short-lived token for a long-lived token:
+
+```sh
+META_APP_ID="..." \
+META_APP_SECRET="..." \
+IG_ACCESS_TOKEN="short-lived-or-existing-token" \
+node scripts/exchange-meta-token.mjs
+```
+
+Update the Cloudflare Worker secret:
+
+```sh
+npx wrangler secret put IG_ACCESS_TOKEN
+npx wrangler deploy
+```
+
+Then test:
+
+```sh
+curl "https://rudedog-instagram-feed.rudedog.workers.dev?mode=official&market=TH"
+curl "https://rudedog-instagram-feed.rudedog.workers.dev?mode=hashtag&tag=rudedog&market=TH"
+```
+
 ## Live Hashtag Flow
 
 1. Connect an Instagram Business or Creator account to a Facebook Page.

@@ -174,6 +174,26 @@
 - Live official endpoint works and returns recent `@rudedog.co` media, so the homepage uses that as the middle fallback while hashtag review is pending.
 - Meta dashboard update: `Instagram Public Content Access` was added to the app permissions/features list and now shows `พร้อมทดสอบ` (ready for testing). The App Review submission page still shows nothing submitted, so Meta has not granted live public hashtag access yet.
 
+### 2026-05-17 Token Expiry Follow-Up
+
+- Live Worker endpoint is reachable, but both modes currently fail with Meta `403`.
+- Exact blocker from Meta: `Error validating access token: Session has expired on Sunday, 17-May-26 02:00:00 PDT`.
+- Static fallback JSON still works on `https://rudedog.co/assets/data/instagram-feed.json`, so the homepage does not break.
+- Added `scripts/check-instagram-feed.mjs` to fail fast when the Worker live feed stops returning image items.
+- Added `scripts/exchange-meta-token.mjs` to exchange a Meta token using `META_APP_ID`, `META_APP_SECRET`, and `IG_ACCESS_TOKEN`.
+- Added `scripts/check-instagram-feed.mjs`; run it from automation or CI to detect live feed failures.
+- Next manual step: generate/refresh a long-lived token in Meta, then run `npx wrangler secret put IG_ACCESS_TOKEN` and `npx wrangler deploy`.
+
+### 2026-05-17 Token Refresh Completed
+
+- Copied a new token from Meta Graph API Explorer without printing it in chat or terminal output.
+- Updated Cloudflare Worker secret with `npx wrangler secret put IG_ACCESS_TOKEN`.
+- Deployed Worker version `e32ebd41-5ec3-4501-8147-62869f570040`.
+- Official endpoint now works: `https://rudedog-instagram-feed.rudedog.workers.dev?mode=official&market=TH` returns 8 items from `RUDEDOG Official`.
+- Hashtag endpoint no longer returns token expiry/permission error, but currently returns 0 items for both `market=TH` and `market=GLOBAL`.
+- Health check script currently passes because it checks the official live feed.
+- Attempted to add a GitHub Actions workflow, but the local GitHub OAuth token cannot push workflow files without the `workflow` scope. Use Codex automation or a manually created GitHub Action if daily CI monitoring is required.
+
 ### Deploy When Credentials Are Available
 
 Run from repo root:
