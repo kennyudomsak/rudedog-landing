@@ -94,3 +94,41 @@ document.querySelectorAll("[data-instagram-feed]").forEach(async (feed) => {
   setActive(0);
   window.setInterval(() => setActive(activeIndex + 1), 5600);
 });
+
+(() => {
+  const toggle = document.querySelector(".nav-toggle");
+  const nav = document.getElementById("primary-nav");
+  if (!toggle || !nav) return;
+
+  const close = () => {
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "เปิดเมนู");
+    nav.classList.remove("is-open");
+    document.body.classList.remove("nav-open");
+  };
+
+  const open = () => {
+    toggle.setAttribute("aria-expanded", "true");
+    toggle.setAttribute("aria-label", "ปิดเมนู");
+    nav.classList.add("is-open");
+    document.body.classList.add("nav-open");
+  };
+
+  toggle.addEventListener("click", () => {
+    const expanded = toggle.getAttribute("aria-expanded") === "true";
+    expanded ? close() : open();
+  });
+
+  nav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => close());
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
+  });
+
+  const mq = window.matchMedia("(min-width: 901px)");
+  mq.addEventListener("change", (e) => {
+    if (e.matches) close();
+  });
+})();

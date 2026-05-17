@@ -58,7 +58,7 @@
 <body>
   <header class="site-header" aria-label="RUDEDOG header">
     <a class="brand" href="/">RUDEDOG®</a>
-    <nav>
+    <nav id="primary-nav" aria-label="Primary">
       <a href="/">หน้าแรก</a>
       <a href="/#hats">หมวก</a>
       <a href="/#bags">กระเป๋า</a>
@@ -66,8 +66,13 @@
       <a href="/#eyewear">แว่น</a>
       <a href="/#dealers">ตัวแทน</a>
       <a href="/#contact">ติดต่อ</a>
-      <a class="shop-link" href="https://shopee.co.th/search?keyword=RUDEDOG&utm_source=rudedog_site&utm_medium=organic&utm_campaign=about_header" target="_blank" rel="noopener">Shop Shopee</a>
     </nav>
+    <div class="header-actions">
+      <a class="shop-link" href="https://shopee.co.th/search?keyword=RUDEDOG&utm_source=rudedog_site&utm_medium=organic&utm_campaign=about_header" target="_blank" rel="noopener">Shop Shopee</a>
+      <button class="nav-toggle" type="button" aria-label="เปิดเมนู" aria-expanded="false" aria-controls="primary-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </header>
 
   <main id="top">
