@@ -1,6 +1,7 @@
 name = "rudedog-instagram-feed"
 main = "workers/instagram-hashtag-worker.js"
 compatibility_date = "2026-05-17"
+workers_dev = true
 
 # Add the live route after the Worker is connected to the Cloudflare zone.
 routes = [

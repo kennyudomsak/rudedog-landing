@@ -69,7 +69,8 @@
 ### Changes Made
 
 - Updated `index.html`
-  - Homepage feed now calls `/api/instagram-feed?mode=hashtag&tag=rudedog&market=TH`
+  - Homepage feed now calls `https://rudedog-instagram-feed.rudedog.workers.dev?mode=hashtag&tag=rudedog&market=TH`
+  - If hashtag is blocked, homepage falls back to `https://rudedog-instagram-feed.rudedog.workers.dev?mode=official&market=TH`
   - Fallback remains `assets/data/instagram-feed.json`
 - Added committed `wrangler.toml`
   - Worker route: `rudedog.co/api/instagram-feed*`
@@ -89,6 +90,18 @@
 - No local `IG_ACCESS_TOKEN` environment variable was available
 - The Worker cannot be deployed from this machine until Cloudflare login and the Instagram token secret are added
 
+### 2026-05-17 Deploy Update
+
+- Cloudflare Wrangler login completed for `ken.udomsak@rdbox.co`
+- Registered workers.dev subdomain: `rudedog.workers.dev`
+- Deployed Worker:
+  - `https://rudedog-instagram-feed.rudedog.workers.dev`
+  - Cloudflare route also exists: `rudedog.co/api/instagram-feed*`
+- Added `IG_ACCESS_TOKEN` as Cloudflare Worker secret. Do not commit or print this token.
+- Important DNS note: `rudedog.co` currently resolves directly to GitHub Pages IPs, so Cloudflare route interception does not work unless DNS is moved/proxied through Cloudflare. The homepage therefore uses the workers.dev URL directly.
+- Current Meta blocker: hashtag endpoint returns `403` because Meta requires App Review approval for `Instagram Public Content Access`. The site falls back to the static JSON until approval.
+- Live official endpoint works and returns recent `@rudedog.co` media, so the homepage uses that as the middle fallback while hashtag review is pending.
+
 ### Deploy When Credentials Are Available
 
 Run from repo root:
@@ -102,7 +115,7 @@ npx wrangler deploy
 After deploy, test:
 
 ```sh
-curl "https://rudedog.co/api/instagram-feed?mode=hashtag&tag=rudedog&market=TH"
+curl "https://rudedog-instagram-feed.rudedog.workers.dev?mode=hashtag&tag=rudedog&market=TH"
 ```
 
 Expected JSON shape:

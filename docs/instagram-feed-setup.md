@@ -28,7 +28,7 @@ Default mode is now `hashtag` for the live Worker route.
 - Current live fallback: `scripts/update-instagram-feed.mjs` downloads recent public `@rudedog.co` images into `assets/images/instagram/` and writes them into `assets/data/instagram-feed.json`.
 - Run `node scripts/update-instagram-feed.mjs` before a push when the landing page needs a fresh official Instagram snapshot.
 
-The homepage now calls `/api/instagram-feed?mode=hashtag&tag=rudedog&market=TH` first. If the Worker is unavailable, the JavaScript falls back to `assets/data/instagram-feed.json`.
+The homepage now calls `https://rudedog-instagram-feed.rudedog.workers.dev?mode=hashtag&tag=rudedog&market=TH` first. If Meta blocks hashtag access, the JavaScript falls back to `https://rudedog-instagram-feed.rudedog.workers.dev?mode=official&market=TH`, then finally to `assets/data/instagram-feed.json`.
 
 To switch back to the official feed, change the homepage Worker URL/config from `mode=hashtag` or `IG_FEED_MODE = "hashtag"` to `mode=official` / `IG_FEED_MODE = "official"`.
 
@@ -44,7 +44,7 @@ To switch back to the official feed, change the homepage Worker URL/config from 
 6. Submit the Meta app for `Instagram Public Content Access` review.
 7. Point the website feed source to the Worker endpoint or run a scheduled job that writes a reviewed JSON file.
 
-The site is wired to try `/api/instagram-feed?mode=hashtag&tag=rudedog&market=TH` first and fall back to `assets/data/instagram-feed.json` when the Worker is not available or returns no usable items.
+The site is wired to try `https://rudedog-instagram-feed.rudedog.workers.dev?mode=hashtag&tag=rudedog&market=TH` first, then the live official feed, then `assets/data/instagram-feed.json` when the Worker is not available or returns no usable items. `rudedog.co/api/instagram-feed*` is also configured as a Cloudflare route, but it will only intercept requests if the apex domain is proxied through Cloudflare instead of going directly to GitHub Pages.
 
 ## Thailand-Only Filtering
 

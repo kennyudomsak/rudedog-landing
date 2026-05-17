@@ -30,7 +30,11 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
 });
 
 document.querySelectorAll("[data-instagram-feed]").forEach(async (feed) => {
-  const sources = [feed.dataset.feedSrc, feed.dataset.feedFallbackSrc].filter(Boolean);
+  const sources = [
+    feed.dataset.feedSrc,
+    feed.dataset.feedOfficialSrc,
+    feed.dataset.feedFallbackSrc
+  ].filter(Boolean);
   const image = feed.querySelector("[data-ig-image]");
   const link = feed.querySelector("[data-ig-link]");
   const tag = feed.querySelector("[data-ig-tag]");

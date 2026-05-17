@@ -123,11 +123,11 @@ async function fetchHashtagFeed({ graphVersion, hashtag, userId, token, market, 
 }
 
 function getMediaImage(item) {
-  if (item.media_url) return item.media_url;
   if (item.thumbnail_url) return item.thumbnail_url;
+  if (item.media_url) return item.media_url;
 
   const child = item.children?.data?.find((entry) => entry.media_url || entry.thumbnail_url);
-  return child?.media_url || child?.thumbnail_url || "";
+  return child?.thumbnail_url || child?.media_url || "";
 }
 
 function cleanCaption(caption = "") {
@@ -171,7 +171,7 @@ function responseHeaders() {
   return {
     "content-type": "application/json; charset=utf-8",
     "cache-control": "public, max-age=900",
-    "access-control-allow-origin": "https://rudedog.co",
+    "access-control-allow-origin": "*",
     "vary": "origin"
   };
 }
