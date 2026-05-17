@@ -46,6 +46,13 @@ img {
   height: auto;
 }
 
+img[loading="lazy"] {
+  background:
+    linear-gradient(110deg, #f4f2eb 8%, #fffefa 18%, #f4f2eb 33%);
+  background-size: 220% 100%;
+  animation: image-placeholder 1.6s linear infinite;
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -860,7 +867,10 @@ h3 {
   min-height: 0;
   padding: 0;
   color: inherit;
-  background: white;
+  background:
+    linear-gradient(110deg, #f4f2eb 8%, #fffefa 18%, #f4f2eb 33%);
+  background-size: 220% 100%;
+  animation: image-placeholder 1.6s linear infinite;
 }
 
 .product-media a:hover,
@@ -883,7 +893,7 @@ h3 {
 }
 
 .product-card > div:not(.product-media) {
-  padding: 18px;
+  padding: 16px 18px 18px;
 }
 
 .product-card h4 {
@@ -1433,6 +1443,11 @@ footer,
   50% { translate: 0 -4px; }
 }
 
+@keyframes image-placeholder {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
 @keyframes marquee-left {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -1577,7 +1592,37 @@ footer,
 
 @media (max-width: 560px) {
   .site-header {
-    align-items: flex-start;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+
+  .brand {
+    min-height: 38px;
+    font-size: 16px;
+  }
+
+  .header-actions {
+    gap: 8px;
+  }
+
+  .header-actions .shop-link {
+    min-width: 72px;
+    justify-content: center;
+    padding-inline: 9px;
+    font-size: 0;
+    white-space: nowrap;
+  }
+
+  .header-actions .shop-link::before {
+    content: "Shopee";
+    font-size: 11px;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-toggle {
+    width: 38px;
+    height: 38px;
   }
 
   .hero {
@@ -1594,9 +1639,11 @@ footer,
   }
 
   .hero-title {
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     gap: 0;
     margin-bottom: 14px;
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
 
   .lead {
@@ -1738,11 +1785,28 @@ footer,
   }
 
   .product-media {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
   }
 
   .product-media img {
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1 / .96;
+  }
+
+  .product-media a:nth-child(2) img {
+    padding: 8px;
+  }
+
+  .product-card > div:not(.product-media) {
+    padding: 14px;
+  }
+
+  .product-card h4 {
+    font-size: 20px;
+  }
+
+  .product-card > div:not(.product-media) a {
+    width: 100%;
+    justify-content: center;
   }
 
   .dealer-grid {
@@ -1750,10 +1814,14 @@ footer,
   }
 
   .dealer-media {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
   }
 
   .dealer-media img {
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1 / .96;
+  }
+
+  .dealer-media a:nth-child(2) img {
+    padding: 8px;
   }
 }
