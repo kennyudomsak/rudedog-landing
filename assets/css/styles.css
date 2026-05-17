@@ -245,10 +245,10 @@ h3 {
 
 .trust-proof {
   position: relative;
-  max-width: 720px;
+  max-width: 900px;
   margin: clamp(28px, 5vw, 54px) 0 0;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1px;
   padding: 0 0 0 7px;
   background: var(--white);
@@ -505,11 +505,64 @@ h3 {
 
 .manifesto-grid,
 .alpha-feature,
-.mascot-band {
+.mascot-band,
+.aero3-grid {
   display: grid;
   grid-template-columns: minmax(0, .95fr) minmax(280px, .75fr);
   gap: clamp(20px, 5vw, 60px);
   align-items: center;
+}
+
+.aero3-section {
+  background: var(--soft);
+}
+
+.aero3-figure {
+  display: grid;
+  align-content: center;
+  gap: 6px;
+  padding: clamp(24px, 4vw, 48px);
+  background: var(--ink);
+  color: var(--white);
+  border-radius: 4px;
+  text-align: left;
+}
+
+.aero3-figure strong {
+  font-size: clamp(52px, 9vw, 120px);
+  line-height: .95;
+  font-weight: 1000;
+  letter-spacing: -0.02em;
+  color: var(--blue);
+  background: var(--white);
+  padding: 0 12px;
+  display: inline-block;
+  width: max-content;
+}
+
+.aero3-figure span {
+  font-size: clamp(16px, 2vw, 22px);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.aero3-copy {
+  display: grid;
+  gap: 18px;
+  font-size: clamp(17px, 1.8vw, 22px);
+  line-height: 1.55;
+}
+
+.aero3-copy strong {
+  color: var(--blue);
+  font-weight: 900;
+}
+
+.closing-microcopy {
+  margin-top: 18px;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: .85;
 }
 
 .manifesto-lines {
@@ -1181,8 +1234,17 @@ footer {
   .hero,
   .manifesto-grid,
   .alpha-feature,
-  .mascot-band {
+  .mascot-band,
+  .aero3-grid {
     grid-template-columns: 1fr;
+  }
+
+  .aero3-figure {
+    padding: 20px;
+  }
+
+  .aero3-figure strong {
+    font-size: clamp(46px, 13vw, 80px);
   }
 
   .instagram-feed,
