@@ -62,6 +62,33 @@
   - header buttons do not collide
   - image placeholders look intentional while lazy images load
 
+## 2026-05-17 Local Hero Design Draft
+
+ยังไม่ push / deploy / live จนกว่าผู้ใช้จะสั่งว่า “เอาการแก้ไขทั้งหมด push”
+
+### Changes Made Locally
+
+- Updated `index.html`
+  - Hero headline changed to stacked `#คนนอก` / `กรอบ`
+  - `#` is separated from `คนนอก` so the fitting script can match `กรอบ` to `คนนอก` only
+  - Hero CTA 1 changed to `New-in มาใหม่` linking to `https://s.shopee.co.th/1BJFIykJtW?share_channel_code=6`
+  - Hero CTA 2 changed to `โปรลง แรงมากกก` linking to the RUDEDOG Shopee shop search for keyword `โปรลง`
+  - In CTA 2, `แรงมากกก` and the `SALE!` badge use a bright red accent
+- Updated `assets/css/styles.css`
+  - Added stacked hero title sizing and tight line spacing
+  - Keeps the two headline lines visually packed without overlapping
+  - Restyled `.trust-proof` into a quieter proof strip with smaller numeric scale and cleaner dividers
+- Updated `assets/js/main.js`
+  - Added responsive fit script for `[data-fit-hero-title]`
+  - Measures `.hero-title-top-word` (`คนนอก`) and scales `.hero-title-bottom` (`กรอบ`) to match that width, excluding `#`
+- Trust proof copy changed from `แบรนด์ไทยจากกรุงเทพฯ` to `แบรนด์ไทย`
+
+### Local Verification
+
+- Checked 390px mobile and 1440px desktop with local server
+- `กรอบ` width matches `คนนอก` width, not `#คนนอก`
+- No horizontal overflow found in the checked viewports
+
 ## 2026-05-17 Instagram Hashtag Feed Install
 
 ผู้ใช้ให้ติดตั้งส่วน Instagram feed สำหรับ `#rudedog` ในประเทศไทย

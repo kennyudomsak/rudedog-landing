@@ -3,6 +3,36 @@
 // animation driven by IntersectionObserver, but on instant/programmatic
 // scrolls the observer would miss elements and leave sections blank.
 
+(() => {
+  const titles = document.querySelectorAll("[data-fit-hero-title]");
+  if (!titles.length) return;
+
+  const fitTitle = (title) => {
+    const top = title.querySelector(".hero-title-top-word") || title.querySelector(".hero-title-top");
+    const bottom = title.querySelector(".hero-title-bottom");
+    if (!top || !bottom) return;
+
+    bottom.style.fontSize = "";
+    const topWidth = top.getBoundingClientRect().width;
+    const bottomWidth = bottom.getBoundingClientRect().width;
+    if (!topWidth || !bottomWidth) return;
+
+    const bottomSize = parseFloat(getComputedStyle(bottom).fontSize);
+    bottom.style.fontSize = `${bottomSize * (topWidth / bottomWidth)}px`;
+  };
+
+  const fitAll = () => {
+    titles.forEach(fitTitle);
+  };
+
+  window.addEventListener("load", fitAll);
+  window.addEventListener("resize", fitAll, { passive: true });
+  if ("fonts" in document) {
+    document.fonts.ready.then(fitAll);
+  }
+  fitAll();
+})();
+
 document.querySelectorAll('a[href*="shopee"]').forEach((link) => {
   link.addEventListener("click", () => {
     window.dataLayer = window.dataLayer || [];
