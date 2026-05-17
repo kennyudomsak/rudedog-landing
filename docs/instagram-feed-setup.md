@@ -41,7 +41,7 @@ Prevention:
 - Use a long-lived Meta user access token for the connected Page / Instagram Business account.
 - Refresh or replace the token before it expires. Long-lived tokens are still not permanent, so schedule a manual rotation cadence around every 45 days.
 - Keep `META_APP_ID`, `META_APP_SECRET`, and `IG_ACCESS_TOKEN` out of git.
-- Run `scripts/check-instagram-feed.mjs` daily from an automation or CI job. A failed check means the live Worker feed is broken, usually because Meta blocked hashtag access or the token expired.
+- Run `scripts/check-instagram-feed.mjs` daily from the GitHub Actions workflow and Codex automation. A failed check means the live Worker feed is broken, usually because Meta blocked hashtag access or the token expired.
 
 Health check:
 

@@ -1,0 +1,17 @@
+name: Instagram feed health
+
+on:
+  schedule:
+    - cron: "15 2 * * *"
+  workflow_dispatch:
+
+jobs:
+  check-feed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check Instagram Worker feed
+        run: node scripts/check-instagram-feed.mjs

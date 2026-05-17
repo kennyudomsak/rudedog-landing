@@ -192,7 +192,8 @@
 - Official endpoint now works: `https://rudedog-instagram-feed.rudedog.workers.dev?mode=official&market=TH` returns 8 items from `RUDEDOG Official`.
 - Hashtag endpoint no longer returns token expiry/permission error, but currently returns 0 items for both `market=TH` and `market=GLOBAL`.
 - Health check script currently passes because it checks the official live feed.
-- Attempted to add a GitHub Actions workflow, but the local GitHub OAuth token cannot push workflow files without the `workflow` scope. Use Codex automation or a manually created GitHub Action if daily CI monitoring is required.
+- GitHub CLI auth was refreshed with the `workflow` scope.
+- Added `.github/workflows/instagram-feed-health.yml` to run `node scripts/check-instagram-feed.mjs` daily and via manual `workflow_dispatch`.
 
 ### Deploy When Credentials Are Available
 
