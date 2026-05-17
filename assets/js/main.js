@@ -132,3 +132,42 @@ document.querySelectorAll("[data-instagram-feed]").forEach(async (feed) => {
     if (e.matches) close();
   });
 })();
+
+(() => {
+  const header = document.querySelector(".site-header");
+  if (!header) return;
+
+  let lastY = window.scrollY;
+  let ticking = false;
+  const threshold = 6;
+  const topZone = 80;
+
+  const update = () => {
+    const y = window.scrollY;
+    const delta = y - lastY;
+
+    if (y <= topZone) {
+      header.classList.remove("is-hidden");
+      header.classList.remove("is-pinned");
+    } else {
+      header.classList.add("is-pinned");
+      if (document.body.classList.contains("nav-open")) {
+        // never hide while drawer is open
+      } else if (delta > threshold) {
+        header.classList.add("is-hidden");
+      } else if (delta < -threshold) {
+        header.classList.remove("is-hidden");
+      }
+    }
+
+    lastY = y;
+    ticking = false;
+  };
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      window.requestAnimationFrame(update);
+      ticking = true;
+    }
+  }, { passive: true });
+})();
