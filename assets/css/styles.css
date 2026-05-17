@@ -113,8 +113,13 @@ body.nav-open {
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  font-size: 17px;
   font-weight: 950;
   letter-spacing: 0;
+  line-height: 1;
 }
 
 nav {
