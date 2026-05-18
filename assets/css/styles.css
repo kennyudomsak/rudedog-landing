@@ -652,6 +652,10 @@ h3 {
   cursor: pointer;
 }
 
+a.ig-thumb {
+  display: block;
+}
+
 .ig-thumb img {
   width: 100%;
   height: 100%;
@@ -665,6 +669,14 @@ h3 {
 
 .ig-thumb.is-active img {
   opacity: 1;
+}
+
+.look-preview .ig-spotlight strong {
+  text-transform: none;
+}
+
+.look-preview .ig-thumb img {
+  opacity: .82;
 }
 
 .ig-disclaimer {

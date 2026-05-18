@@ -209,6 +209,13 @@
 - During pre-push verification, `node scripts/check-instagram-feed.mjs` reported the Worker live endpoint failing again with Meta token expiry: `Session has expired on Sunday, 17-May-26 05:00:00 PDT`.
 - Static fallback still works with 8 local `@rudedog.co` items, so the homepage should not visually break, but the Cloudflare Worker secret needs another long-lived token refresh.
 
+### 2026-05-18 Instagram Hashtag Strategy Change
+
+- User decided to stop trying to show live `#rudedog` content because Meta/Curator/Facebook connection paths are too fragile.
+- Drafted a replacement for the former Instagram feed section: static curated `RUDEDOG LOOKS` / model preview using local brand images and Shopee links.
+- This change removes the public `#rudedog`/Graph API messaging from the section and does not depend on `data-instagram-feed`.
+- User approved pushing this replacement after reviewing the mobile preview.
+
 ### Deploy When Credentials Are Available
 
 Run from repo root:
