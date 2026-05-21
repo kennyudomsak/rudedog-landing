@@ -5,7 +5,8 @@ workers_dev = true
 
 # Add the live route after the Worker is connected to the Cloudflare zone.
 routes = [
-  { pattern = "rudedog.co/api/instagram-feed*", zone_name = "rudedog.co" }
+  { pattern = "rudedog.co/api/instagram-feed*", zone_name = "rudedog.co" },
+  { pattern = "rudedog.co/api/visit*", zone_name = "rudedog.co" }
 ]
 
 [vars]
@@ -18,3 +19,12 @@ META_GRAPH_VERSION = "v25.0"
 
 # Store secrets with:
 # npx wrangler secret put IG_ACCESS_TOKEN
+
+[durable_objects]
+bindings = [
+  { name = "VISIT_COUNTER", class_name = "VisitCounter" }
+]
+
+[[migrations]]
+tag = "v1"
+new_classes = ["VisitCounter"]

@@ -199,3 +199,19 @@ document.querySelectorAll("[data-instagram-feed]").forEach(async (feed) => {
     }
   }, { passive: true });
 })();
+
+(() => {
+  const target = document.getElementById("webcode");
+  if (!target) return;
+
+  fetch("/api/visit", { cache: "no-store", credentials: "omit" })
+    .then((response) => response.json().then((payload) => ({ response, payload })))
+    .then(({ response, payload }) => {
+      if (!response.ok) return;
+      if (!payload || typeof payload.webcode !== "string") return;
+
+      target.textContent = payload.webcode;
+      document.body.appendChild(document.createComment(` ${payload.webcode} `));
+    })
+    .catch(() => {});
+})();

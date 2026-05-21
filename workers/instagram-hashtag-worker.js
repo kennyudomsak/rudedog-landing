@@ -5,6 +5,10 @@ export default {
     }
 
     const url = new URL(request.url);
+    if (url.pathname.startsWith("/api/visit")) {
+      return handleVisit(request, env);
+    }
+
     const hashtag = url.searchParams.get("tag") || env.IG_HASHTAG || "rudedog";
     const mode = (url.searchParams.get("mode") || env.IG_FEED_MODE || "official").toLowerCase();
     const market = (url.searchParams.get("market") || env.IG_MARKET || "TH").toUpperCase();
@@ -23,6 +27,20 @@ export default {
     return fetchHashtagFeed({ graphVersion, hashtag, userId, token, market, env });
   }
 };
+
+async function handleVisit(request, env) {
+  if (request.method !== "GET") {
+    return jsonResponse({ error: "Method not allowed" }, 405);
+  }
+
+  if (!env.VISIT_COUNTER) {
+    return jsonResponse({ error: "VISIT_COUNTER durable object binding is not configured" }, 500);
+  }
+
+  const counterId = env.VISIT_COUNTER.idFromName("global");
+  const counter = env.VISIT_COUNTER.get(counterId);
+  return counter.fetch(request);
+}
 
 async function fetchOfficialFeed({ graphVersion, userId, token, market, env }) {
     const officialMedia = new URL(`https://graph.facebook.com/${graphVersion}/${userId}/media`);
@@ -174,4 +192,49 @@ function responseHeaders() {
     "access-control-allow-origin": "*",
     "vary": "origin"
   };
+}
+
+export class VisitCounter {
+  constructor(state) {
+    this.state = state;
+  }
+
+  async fetch(request) {
+    const url = new URL(request.url);
+    if (request.method !== "GET") {
+      return jsonResponse({ error: "Method not allowed" }, 405);
+    }
+
+    const now = new Date();
+    const dayKey = now.toISOString().slice(0, 10); // YYYY-MM-DD (UTC)
+    const dayStorageKey = `day:${dayKey}`;
+
+    const result = await this.state.storage.transaction(async (storage) => {
+      const [total, today] = await Promise.all([
+        storage.get("total"),
+        storage.get(dayStorageKey)
+      ]);
+
+      const nextTotal = (Number(total) || 0) + 1;
+      const nextToday = (Number(today) || 0) + 1;
+
+      await Promise.all([
+        storage.put("total", nextTotal),
+        storage.put(dayStorageKey, nextToday),
+        storage.put("lastVisitAt", now.toISOString())
+      ]);
+
+      return { total: nextTotal, today: nextToday, day: dayKey };
+    });
+
+    const todayPadded = String(result.today).padStart(4, "0");
+    return jsonResponse({
+      ok: true,
+      day: result.day,
+      total: result.total,
+      today: result.today,
+      webcode: `Webcode: ${result.total} ${todayPadded}`,
+      mode: url.searchParams.get("mode") || "count_all"
+    });
+  }
 }

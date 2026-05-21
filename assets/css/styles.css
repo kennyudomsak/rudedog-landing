@@ -1459,6 +1459,14 @@ footer,
   font-size: 11px;
 }
 
+.site-footer .footer-webcode {
+  opacity: .55;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  user-select: none;
+  font-variant-numeric: tabular-nums;
+}
+
 .about-hero {
   min-height: 0;
   padding-block: clamp(60px, 9vw, 130px);
