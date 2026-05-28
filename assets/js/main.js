@@ -204,14 +204,28 @@ document.querySelectorAll("[data-instagram-feed]").forEach(async (feed) => {
   const target = document.getElementById("webcode");
   if (!target) return;
 
-  fetch("/api/visit", { cache: "no-store", credentials: "omit" })
-    .then((response) => response.json().then((payload) => ({ response, payload })))
-    .then(({ response, payload }) => {
-      if (!response.ok) return;
-      if (!payload || typeof payload.webcode !== "string") return;
+  const sources = [
+    "/api/visit",
+    "https://rudedog-instagram-feed.rudedog.workers.dev/api/visit"
+  ];
 
-      target.textContent = payload.webcode;
-      document.body.appendChild(document.createComment(` ${payload.webcode} `));
-    })
-    .catch(() => {});
+  const updateWebcode = async () => {
+    for (const source of sources) {
+      try {
+        const response = await fetch(source, { cache: "no-store", credentials: "omit" });
+        if (!response.ok) continue;
+
+        const payload = await response.json();
+        if (!payload || typeof payload.webcode !== "string") continue;
+
+        target.textContent = payload.webcode;
+        document.body.appendChild(document.createComment(` ${payload.webcode} `));
+        return;
+      } catch (error) {
+        // Keep the static fallback if both the routed and direct Worker calls fail.
+      }
+    }
+  };
+
+  updateWebcode();
 })();
